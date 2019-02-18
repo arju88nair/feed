@@ -16,6 +16,14 @@ class DoctorSerializer(serializers.ModelSerializer):
 class InteractionsSerializer(serializers.ModelSerializer):
 
     class Meta:
-
         fields = ('user_id', 'doctor_id', 'count')
         model = models.Interactions
+
+    def create(self, validated_data):
+        if self.context['request'].user:
+            newlist = Interactions.objects.create(**validated_data)
+            print(validated_data)
+            return validated_data
+        else:
+            print("DSfsdds")
+        
