@@ -13,3 +13,4 @@ class DoctorList(generics.ListAPIView):
 class DoctorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+
