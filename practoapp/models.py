@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 
 # Create your models here.
 class Doctor(models.Model):
@@ -16,6 +17,17 @@ class Doctor(models.Model):
     def publish(self):
         self.published_date = timezone.now()
         self.save()
+
+    def __str__(self):
+        return str(self.pk) + " - " + self.title
+
+
+
+class Interactions(models.Model):
+    user_id=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    doctor_id=models.ForeignKey(
+        Doctor, on_delete=models.CASCADE)
+    count=models.IntegerField(default=1)
 
     def __str__(self):
         return str(self.pk) + " - " + self.title
