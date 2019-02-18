@@ -24,8 +24,8 @@ class Doctor(models.Model):
 
 
 class Interactions(models.Model):
-    user_id=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-    doctor_id=models.ForeignKey(
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    doctor=models.ForeignKey(
         Doctor, on_delete=models.CASCADE)
     count=models.BooleanField(default=True)
 

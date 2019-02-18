@@ -44,19 +44,31 @@ class InteractionsDetail(generics.RetrieveUpdateDestroyAPIView):
 @api_view(["POST"])
 def search_doctors(request):
     try:
-        liked=Interactions.objects.filter(
-        user_id=1).filter(doctor_id=1)       
-
-        data = list(liked.values())
-        return JsonResponse({"success":True,"data":data}, safe=False)       
-    
-        if request.user.is_authenticated:
+        doctor=request.POST['doctor_id']
+        doctors=Doctor.objects.filter(pk=doctor)
+        if(doctors):
             liked=Interactions.objects.filter(
-    user_id=1
-)           
-            
+        user_id=1).filter(doctor_id=doctor) 
+            data = list(liked.values())
+            if(data):
+                interaction, created = Interactions.objects.update_or_create(
+        doctor_id=doctor, defaults={"name": not count}
+)
+                return JsonResponse({"success":True,"data":data[0]}, safe=False)
+            else:
+                return JsonResponse({"success":True,"message":"Couldn't find any"}, safe=False)
+                  
         else:
-            return JsonResponse("Lorem ipsum blah",safe=False)
+            return JsonResponse({"success":False,"message":"Doctor doesn't exist"}, safe=False)      
+
+    
+#         if request.user.is_authenticated:
+#             liked=Interactions.objects.filter(
+#     user_id=1
+# )           
+            
+#         else:
+#             return JsonResponse("Lorem ipsum blah",safe=False)
 
 
         
