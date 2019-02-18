@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'practoapp',
     'rest_framework',
+    'django_filters'
 
 ]
 
@@ -72,6 +73,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'practo.wsgi.application'
 
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
