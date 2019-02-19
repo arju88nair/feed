@@ -49,3 +49,10 @@ Available API routes
 | /api/availability/`<id>`    	| GET    	| Retrieving a specific doctor availability by id                                                                  	|
 | /api/availability/        	| DELETE 	| For deleting the availability by id                                                                              	|
 | /api/doctors?`<parameters>` 	| GET    	| For filtering and searching on knowing a doctor's availability. Accepts `doctor_id` and `availability` as parameters 	|
+
+
+## TODO
+
+- Authentication for the Viewset APIs
+-  Custom response for the Viewset APIs
+- Better request handling

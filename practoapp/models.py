@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 
-# Create your models here.
+# Existing models
 class Doctor(models.Model):
     title = models.CharField(max_length=100)
     name = models.CharField(max_length=100)

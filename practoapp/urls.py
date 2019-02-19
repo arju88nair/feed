@@ -10,5 +10,4 @@ urlpatterns = [
     path('like',views.addlike),
     path('availability', views.AvailabilityList.as_view()),
     path('availability/<int:pk>/detail', views.AvailabilityDetail.as_view()),
-
 ]

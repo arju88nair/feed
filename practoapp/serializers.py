@@ -2,10 +2,10 @@ from rest_framework import serializers
 from . import models
 
 
+## Serializer classes for all the three models
 class DoctorSerializer(serializers.ModelSerializer):
 
     class Meta:
-
         fields = ('title', 'name', 'summary', 'location',
             'gender', 'speciality',
             'created_date', 'published_date','is_active')
@@ -14,7 +14,6 @@ class DoctorSerializer(serializers.ModelSerializer):
 
 
 class InteractionsSerializer(serializers.ModelSerializer):
-
     class Meta:
         fields = ('user_id', 'doctor_id', 'is_liked')
         model = models.Interactions
@@ -22,7 +21,6 @@ class InteractionsSerializer(serializers.ModelSerializer):
 
 
 class AvailabilitySerializer(serializers.ModelSerializer):
-
     class Meta:
         fields = ('doctor_id', 'availability')
         model = models.Availability

@@ -21,10 +21,10 @@ class DoctorList(generics.ListCreateAPIView):
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('location', 'speciality','gender')
 
-
 class DoctorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+
 
 
 class InteractionsList(generics.ListCreateAPIView):
@@ -35,12 +35,9 @@ class InteractionsList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user_id=self.request.user)
 
-
 class InteractionsDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Interactions.objects.all()
     serializer_class = InteractionsSerializer
-
-
 
 
 class AvailabilityList(generics.ListCreateAPIView):
@@ -55,12 +52,12 @@ class AvailabilityDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AvailabilitySerializer
 
 
+
 """[For liking/un-liking a specific post]
 
 Returns:
     [JSON] -- [Return json response]
 """
-
 
 @api_view(["POST"])
 def addlike(request):
