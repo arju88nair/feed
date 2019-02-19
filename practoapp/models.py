@@ -27,7 +27,7 @@ class Interactions(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     doctor=models.ForeignKey(
         Doctor, on_delete=models.CASCADE)
-    count=models.BooleanField(default=True)
+    is_liked=models.BooleanField(default=True)
 
     def __str__(self):
         return str(self.pk) + " - " + self.title

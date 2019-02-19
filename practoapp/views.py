@@ -12,7 +12,9 @@ from django.core import serializers
 from django.conf import settings
 
 
+## TODO: Should rely on the token based authentication
 
+## Generic views for all the 3 models
 class DoctorList(generics.ListCreateAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
@@ -41,36 +43,43 @@ class InteractionsDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 
+"""[For liking/un-liking a specific post]
+
+Returns:
+    [JSON] -- [Return json response]
+"""
+
+
 @api_view(["POST"])
 def search_doctors(request):
-    try:
-        doctor=request.POST['doctor_id']
-        doctors=Doctor.objects.filter(pk=doctor)
-        if(doctors):
-            liked=Interactions.objects.filter(
-        user_id=1).filter(doctor_id=doctor) 
-            data = list(liked.values())
-            if(data):
-                interaction, created = Interactions.objects.update_or_create(
-        doctor_id=doctor, defaults={"name": not count}
-)
-                return JsonResponse({"success":True,"data":data[0]}, safe=False)
+    ## Checks if the user is authenticated or not
+    if request.user.is_authenticated:
+        try:
+            doctor=request.POST['doctor_id']
+            user_id=request.user.id
+            ## Checking if the doctor is present for the requested id
+            doctors=Doctor.objects.filter(pk=doctor)
+            if(doctors):
+                ## Getting the interaction for the logged in user and doctor id
+                liked=Interactions.objects.filter(
+            user_id=user_id).filter(doctor_id=doctor) 
+            ## Updating or creating based on the response 
+            ## TODO : Should rely on the update_create method on the django model and move the toggling of the is_liked to serializer
+                if(liked):
+                    for like in liked:
+                        like.user_id = not like.user_id
+                        like.save()   
+                else:
+                    Interactions.objects.create(user_id=user_id, doctor_id=doctor ,is_liked=True)
+                return JsonResponse({"success":True,"message":"Successfully liked"}, safe=False)        
             else:
-                return JsonResponse({"success":True,"message":"Couldn't find any"}, safe=False)
-                  
-        else:
-            return JsonResponse({"success":False,"message":"Doctor doesn't exist"}, safe=False)      
+                return JsonResponse({"success":False,"message":"Doctor doesn't exist"}, safe=False)      
 
+        except ValueError as e:
+            return Response(e.args[0],status.HTTP_400_BAD_REQUEST)
+
+    else:
+        return JsonResponse("User is not authenticated",safe=False)
     
-#         if request.user.is_authenticated:
-#             liked=Interactions.objects.filter(
-#     user_id=1
-# )           
-            
-#         else:
-#             return JsonResponse("Lorem ipsum blah",safe=False)
-
 
         
-    except ValueError as e:
-        return Response(e.args[0],status.HTTP_400_BAD_REQUEST)
