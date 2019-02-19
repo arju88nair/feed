@@ -37,15 +37,15 @@ Available API routes
 |---------------------------	|--------	|:----------------------------------------------------------------------------------------------------------------:	|
 | /api/doctors              	| GET    	| List of available doctors                                                                                        	|
 | /api/doctors              	| PUT    	| For adding a new doctor                                                                                          	|
-| /api/doctors/<id>         	| GET    	| Retrieving a specific doctor detail                                                                              	|
-| /api/doctors/<id>         	| DELETE 	| For deleting the doctor by id                                                                                    	|
-| /api/doctors?<parameters> 	| GET    	| For filtering and searching based on `location`,`speciality` and `gender`                                              	|
+| /api/doctors/`<id>`         	| GET    	| Retrieving a specific doctor detail                                                                              	|
+| /api/doctors/`<id>`         	| DELETE 	| For deleting the doctor by id                                                                                    	|
+| /api/doctors?`<parameters>` 	| GET    	| For filtering and searching based on `location`,`speciality` and `gender`                                              	|
 | /api/likes                	| GET    	| List of available interactions                                                                                   	|
 | /api/likes/               	| GET    	| Retrieving a specific interactions detail                                                                        	|
 | /api/likes/               	| DELETE 	| For deleting the interactions by id                                                                              	|
 | /api/like/                	| POST   	| For liking a specific doctor. Accepts doctor_id as the POST parameter. Requires user authentication              	|
 | /api/availability         	| GET    	| List of availability of doctors                                                                                  	|
 | /api/availability         	| PUT    	| For adding a new availability with doctor as foreign key                                                         	|
-| /api/availability/<id>    	| GET    	| Retrieving a specific doctor availability by id                                                                  	|
+| /api/availability/`<id>`    	| GET    	| Retrieving a specific doctor availability by id                                                                  	|
 | /api/availability/        	| DELETE 	| For deleting the availability by id                                                                              	|
-| /api/doctors?<parameters> 	| GET    	| For filtering and searching on knowing a doctor's availability. Accepts `doctor_id` and `availability` as parameters 	|
+| /api/doctors?`<parameters>` 	| GET    	| For filtering and searching on knowing a doctor's availability. Accepts `doctor_id` and `availability` as parameters 	|
