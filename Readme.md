@@ -43,7 +43,7 @@ Available API routes
 | /api/likes                	| GET    	| List of available interactions                                                                                   	|
 | /api/likes/               	| GET    	| Retrieving a specific interactions detail                                                                        	|
 | /api/likes/               	| DELETE 	| For deleting the interactions by id                                                                              	|
-| /api/like/                	| POST   	| For liking a specific doctor. Accepts doctor_id as the POST parameter. Requires user authentication              	|
+| /api/like/                	| POST   	| For liking/un-liking a specific doctor. Accepts doctor_id as the POST parameter. Requires user authentication              	|
 | /api/availability         	| GET    	| List of availability of doctors                                                                                  	|
 | /api/availability         	| PUT    	| For adding a new availability with doctor as foreign key                                                         	|
 | /api/availability/`<id>`    	| GET    	| Retrieving a specific doctor availability by id                                                                  	|
