@@ -19,7 +19,7 @@ class DoctorList(generics.ListCreateAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('location', 'speciality')
+    filter_fields = ('location', 'speciality','gender')
 
 
 class DoctorDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -63,7 +63,7 @@ Returns:
 
 
 @api_view(["POST"])
-def search_doctors(request):
+def addlike(request):
     ## Checks if the user is authenticated or not
     if request.user.is_authenticated:
         try:

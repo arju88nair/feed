@@ -22,6 +22,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('practoapp.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('api/addlike',views.search_doctors),
-
 ]
