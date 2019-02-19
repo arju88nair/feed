@@ -8,7 +8,7 @@ class DoctorSerializer(serializers.ModelSerializer):
 
         fields = ('title', 'name', 'summary', 'location',
             'gender', 'speciality',
-            'created_date', 'published_date')
+            'created_date', 'published_date','is_active')
         model = models.Doctor
 
 
@@ -16,14 +16,13 @@ class DoctorSerializer(serializers.ModelSerializer):
 class InteractionsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        fields = ('user_id', 'doctor_id', 'count')
+        fields = ('user_id', 'doctor_id', 'is_liked')
         model = models.Interactions
 
-    def create(self, validated_data):
-        if self.context['request'].user:
-            newlist = Interactions.objects.create(**validated_data)
-            print(validated_data)
-            return validated_data
-        else:
-            print("DSfsdds")
-        
+
+
+class AvailabilitySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = ('doctor_id', 'availability')
+        model = models.Availability

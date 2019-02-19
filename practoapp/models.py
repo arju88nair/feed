@@ -19,7 +19,7 @@ class Doctor(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.pk) + " - " + self.title
+        return str(self.pk) + " - " + self.name
 
 
 
@@ -30,4 +30,15 @@ class Interactions(models.Model):
     is_liked=models.BooleanField(default=True)
 
     def __str__(self):
-        return str(self.pk) + " - " + self.title
+        return str(self.pk) + " - " + self.doctor
+
+
+class Availability(models.Model):
+    doctor_id=models.ForeignKey(
+        Doctor, on_delete=models.CASCADE)
+        ## Takes dates as Monday,Tuesday ...
+    availability=models.CharField(max_length=100)
+    
+    def __str__(self):
+        return str(self.pk) + " - " + self.availability
+

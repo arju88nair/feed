@@ -1,8 +1,8 @@
 
 from rest_framework import generics,viewsets
 
-from .models import Doctor,Interactions
-from .serializers import DoctorSerializer,InteractionsSerializer
+from .models import Doctor,Interactions,Availability
+from .serializers import DoctorSerializer,InteractionsSerializer,AvailabilitySerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -43,6 +43,18 @@ class InteractionsDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 
+class AvailabilityList(generics.ListCreateAPIView):
+    queryset = Availability.objects.all()
+    serializer_class = AvailabilitySerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('doctor_id', 'availability')
+
+
+class AvailabilityDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Availability.objects.all()
+    serializer_class = AvailabilitySerializer
+
+
 """[For liking/un-liking a specific post]
 
 Returns:
@@ -73,13 +85,13 @@ def search_doctors(request):
                     Interactions.objects.create(user_id=user_id, doctor_id=doctor ,is_liked=True)
                 return JsonResponse({"success":True,"message":"Successfully liked"}, safe=False)        
             else:
-                return JsonResponse({"success":False,"message":"Doctor doesn't exist"}, safe=False)      
+                return Response("Doctor doesn't exist",status.HTTP_400_BAD_REQUEST)    
 
         except ValueError as e:
             return Response(e.args[0],status.HTTP_400_BAD_REQUEST)
 
     else:
-        return JsonResponse("User is not authenticated",safe=False)
+        return Response("User is not authenticated",status.HTTP_400_BAD_REQUEST)
     
 
         
